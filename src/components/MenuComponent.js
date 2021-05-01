@@ -53,7 +53,7 @@ class Menu extends Component {
         console.log('Menu Component constructor is invoked');
     }
 
-    componentDidMount(){
+    componentDidMount() {
         console.log('Menu Component componentDidMount is invoked');
     }
 
@@ -85,7 +85,7 @@ class Menu extends Component {
 
         const menu = this.state.dishes.map((dish) => {
             return (
-                
+
                 <div key={dish.id} className="col-12 col-md-5 m-1">
                     {/* <Header/> */}
                     <Card onClick={() => this.onDishSelect(dish)}>
