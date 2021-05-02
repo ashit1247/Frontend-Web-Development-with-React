@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand } from 'reactstrap';
 import Home from './components/HomeComponent';
 import Menu from './components/MenuComponent';
+import Contact from './components/ContactComponent';
 import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 import Header from './components/HeaderComponent';
@@ -10,27 +10,17 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 function App() {
 
-  const HomePage = () => {
-    return (
-      <Home />
-    );
-  }
-
-  const MenuPage = () => {
-    return (
-      <Menu />
-    );
-  }
   return (
     <BrowserRouter>
       <div>
         <Header />
         <Switch>
-          <Route path="/home" component={HomePage} />
-          <Route path="/menu" component={MenuPage} />
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/menu" component={Menu}/>
+          <Route exact path="/contactus" component={Contact} />
           <Redirect to="/home" />
         </Switch>
-        <Menu />
+
         <Footer />
       </div>
     </BrowserRouter>

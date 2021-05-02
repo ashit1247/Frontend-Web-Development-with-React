@@ -24,7 +24,7 @@ class Header extends Component {
                 <Navbar dark expand="md">
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav} />
-                        <NavbarBrand className="mr-auto" href="/">
+                        <NavbarBrand className="mr-auto" href="/home">
                             <img src="assets/images/logo.png" width="30" height="41" alt="Ristorante Con Fusion"></img>
                         </NavbarBrand>
                         <Collapse isOpen={this.state.isNavOpen} navbar>
@@ -32,22 +32,22 @@ class Header extends Component {
                                 <NavItem>
                                     <NavLink className="nav-link" to="/home">
                                         <span className="fa fa-home fa-lg"></span>Home
-                                </NavLink>
+                                    </NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink className="nav-link" to="/aboutus">
                                         <span className="fa fa-info fa-lg"></span>About Us
-                                </NavLink>
+                                    </NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink className="nav-link" to="/menu">
                                         <span className="fa fa-list fa-lg"></span>Menu
-                                </NavLink>
+                                    </NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink className="nav-link" to="/contactus">
                                         <span className="fa fa-address-card fa-lg"></span>Contact Us
-                                </NavLink>
+                                    </NavLink>
                                 </NavItem>
                             </Nav>
                         </Collapse>
