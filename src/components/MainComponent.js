@@ -5,6 +5,7 @@ import Contact from './ContactComponent';
 import DishDetail from './DishDetailComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
+import About from './AboutComponent';
 import { DISHES } from '../shared/dishes';
 import { COMMENTS } from '../shared/comments';
 import { LEADERS } from '../shared/leaders';
@@ -18,7 +19,7 @@ class Main extends Component {
             dishes: DISHES,
             comments: COMMENTS,
             promotions: PROMOTIONS,
-            leadres: LEADERS
+            leaders: LEADERS
         };
     }
 
@@ -30,7 +31,15 @@ class Main extends Component {
             return (
                 <Home dish={this.state.dishes.filter((dish) => dish.featured)[0]}
                     promotion={this.state.promotions.filter((promo) => promo.featured)[0]}
-                    leader={this.state.leadres.filter((leader) => leader.featured)[0]}
+                    leader={this.state.leaders.filter((leader) => leader.featured)[0]}
+                />
+            );
+        }
+
+        const AboutUsPage = () => {
+            return(
+                <About 
+                    leaders={this.state.leaders}
                 />
             );
         }
@@ -47,6 +56,7 @@ class Main extends Component {
                 <Header />
                 <Switch>
                     <Route path="/home" component={HomePage} />
+                    <Route exact path="/aboutus" component={AboutUsPage} />
                     <Route exact path="/menu" component={() => <Menu dishes={this.state.dishes} />} />
                     <Route path="/menu/:dishId" component={DishwithId} />
                     <Route exact path="/contactus" component={Contact} />
