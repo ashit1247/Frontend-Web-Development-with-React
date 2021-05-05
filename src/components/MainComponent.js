@@ -37,8 +37,8 @@ class Main extends Component {
         }
 
         const AboutUsPage = () => {
-            return(
-                <About 
+            return (
+                <About
                     leaders={this.state.leaders}
                 />
             );
