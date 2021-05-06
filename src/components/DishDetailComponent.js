@@ -6,6 +6,7 @@ import {
 } from "reactstrap";
 
 import { Control, LocalForm, Errors } from 'react-redux-form';
+import { addComment } from '../redux/ActionCreaters';
 
 const required = (val) => val && val.length; //value > 0
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -28,10 +29,8 @@ class CommentForm extends Component {
 
 
     handleCommentFormSubmit(values) {
-        console.log("Current State is: " + JSON.stringify(values));
-        alert("Current State is: " + JSON.stringify(values));
-
-
+        this.toggleCommentFormModal();
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     toggleCommentFormModal() {
@@ -195,7 +194,7 @@ class DishDetail extends Component {
         }
     }
 
-    renderComments(comments) {
+    renderComments(comments, addComment, dishId) {
         if (comments == null) {
             return (<div></div>);
         }
@@ -204,12 +203,7 @@ class DishDetail extends Component {
                 <li key={comment.id}>
                     <p>{comment.comment}</p>
                     <p>-- {comment.author},
-                    &nbsp;
-                    {new Intl.DateTimeFormat('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: '2-digit'
-                    }).format(new Date(comment.date))}
+                    {new Intl.DateTimeFormat('en-US',{year:'numeric', month:'short', day:'2-digit'}).format(new Date(Date.parse(comment.date)))}
                     </p>
                 </li>
             );
@@ -220,7 +214,7 @@ class DishDetail extends Component {
                 <ul className='list-unstyled'>
                     {cmnts}
                 </ul>
-                <CommentForm comments={comments} />
+                <CommentForm comments={comments} dishId={dishId} addComment={addComment} />
             </div>
         );
     }
@@ -230,6 +224,8 @@ class DishDetail extends Component {
         console.log("DishDetail render is invoked");
         const dish = this.props.dish
         const comments = this.props.comments
+        const addComment = this.props.addComment
+        const dishID = this.props.dish.id
 
         console.log(dish);
 
@@ -238,7 +234,7 @@ class DishDetail extends Component {
         }
 
         const dishItem = this.renderDish(dish);
-        const dishComment = this.renderComments(comments);
+        const dishComment = this.renderComments(comments, addComment, dishID);
 
         return (
             <div className="container">
