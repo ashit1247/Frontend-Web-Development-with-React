@@ -22,7 +22,7 @@ function RenderLeader({ leader }) {
 
 function About(props) {
 
-    const leaders = props.leaders.map((leader) => {
+const leaders = props.leaders.map((leader) => {
         return (
             <RenderLeader leader={leader} />            
         );

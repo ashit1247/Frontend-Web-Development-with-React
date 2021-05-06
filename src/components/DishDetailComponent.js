@@ -6,7 +6,9 @@ import {
 } from "reactstrap";
 
 import { Control, LocalForm, Errors } from 'react-redux-form';
+//import {addComment, fetchDishes} from '../redux/ActionCreaters';
 import { addComment } from '../redux/ActionCreaters';
+import { Loading } from './LoadingComponent';
 
 const required = (val) => val && val.length; //value > 0
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -203,7 +205,7 @@ class DishDetail extends Component {
                 <li key={comment.id}>
                     <p>{comment.comment}</p>
                     <p>-- {comment.author},
-                    {new Intl.DateTimeFormat('en-US',{year:'numeric', month:'short', day:'2-digit'}).format(new Date(Date.parse(comment.date)))}
+                    {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(comment.date)))}
                     </p>
                 </li>
             );
@@ -225,36 +227,57 @@ class DishDetail extends Component {
         const dish = this.props.dish
         const comments = this.props.comments
         const addComment = this.props.addComment
-        const dishID = this.props.dish.id
-
-        console.log(dish);
-
-        if (dish == null) {
-            return (<div></div>);
-        }
+        const dishID = this.props.dishId
 
         const dishItem = this.renderDish(dish);
         const dishComment = this.renderComments(comments, addComment, dishID);
 
-        return (
-            <div className="container">
-                <div className="row">
-                    <Breadcrumb>
-                        {/* <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem> */}
-                        <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-                        <BreadcrumbItem active>{this.props.dish.name}</BreadcrumbItem>
-                    </Breadcrumb>
+        console.log(dish);
+        if (this.props.isLoading) {
+            return (
+                <div className="container">
+                    <div className="row">
+                        <Loading />
+                    </div>
                 </div>
-                <div className="col-12">
-                    <h3>{this.props.dish.name}</h3>
-                    <hr />
+            );
+        }
+
+        else if (this.props.errMess) {
+            return (
+                <div className="container">
+                    <div className="row">
+                        <h4>{this.props.errMess}</h4>
+                    </div>
                 </div>
-                <div className='row row-content'>
-                    {dishItem}
-                    {dishComment}
+            );
+        }
+
+        // if (dish == null) {
+        //     return (<div></div>);
+        // }
+
+
+        else
+            return (
+                <div className="container">
+                    <div className="row">
+                        <Breadcrumb>
+                            {/* <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem> */}
+                            <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                            <BreadcrumbItem active>{this.props.dish.name}</BreadcrumbItem>
+                        </Breadcrumb>
+                    </div>
+                    <div className="col-12">
+                        <h3>{this.props.dish.name}</h3>
+                        <hr />
+                    </div>
+                    <div className='row row-content'>
+                        {dishItem}
+                        {dishComment}
+                    </div>
                 </div>
-            </div>
-        );
+            );
     }
 }
 

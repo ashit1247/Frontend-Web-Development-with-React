@@ -11,7 +11,6 @@ const isNumber = (val) => !isNaN(Number(val));
 
 const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
-
 class Contact extends Component {
 
     constructor(props) {
@@ -21,12 +20,8 @@ class Contact extends Component {
     }
 
     handleSubmit(values) {
-        console.log("Current state is: " + JSON.stringify(values));
         alert("Current state is: " + JSON.stringify(values));
     }
-
-
-
     render() {
 
         return (
