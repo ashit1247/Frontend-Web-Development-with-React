@@ -34,6 +34,8 @@ class Main extends Component {
         this.props.fetchDishes();
     }
 
+
+
     render() {
 
         const HomePage = () => {

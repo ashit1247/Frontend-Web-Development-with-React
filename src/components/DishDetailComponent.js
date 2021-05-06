@@ -6,7 +6,6 @@ import {
 } from "reactstrap";
 
 import { Control, LocalForm, Errors } from 'react-redux-form';
-//import {addComment, fetchDishes} from '../redux/ActionCreaters';
 import { addComment } from '../redux/ActionCreaters';
 import { Loading } from './LoadingComponent';
 
@@ -228,11 +227,13 @@ class DishDetail extends Component {
         const comments = this.props.comments
         const addComment = this.props.addComment
         const dishID = this.props.dishId
-
         const dishItem = this.renderDish(dish);
         const dishComment = this.renderComments(comments, addComment, dishID);
 
         console.log(dish);
+
+
+
         if (this.props.isLoading) {
             return (
                 <div className="container">
@@ -240,6 +241,7 @@ class DishDetail extends Component {
                         <Loading />
                     </div>
                 </div>
+
             );
         }
 
@@ -250,15 +252,12 @@ class DishDetail extends Component {
                         <h4>{this.props.errMess}</h4>
                     </div>
                 </div>
-            );
+            )
         }
 
-        // if (dish == null) {
-        //     return (<div></div>);
-        // }
 
 
-        else
+        else if (dish != null)
             return (
                 <div className="container">
                     <div className="row">
@@ -278,6 +277,10 @@ class DishDetail extends Component {
                     </div>
                 </div>
             );
+
+        else {
+            return (<div></div>);
+        }
     }
 }
 
