@@ -6,7 +6,6 @@ import {
 } from "reactstrap";
 
 import { Control, LocalForm, Errors } from 'react-redux-form';
-import { addComment } from '../redux/ActionCreaters';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl'
 
@@ -32,7 +31,7 @@ class CommentForm extends Component {
 
     handleCommentFormSubmit(values) {
         this.toggleCommentFormModal();
-        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+        this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     toggleCommentFormModal() {
@@ -196,7 +195,7 @@ class DishDetail extends Component {
         }
     }
 
-    renderComments(comments, addComment, dishId) {
+    renderComments(comments, postComment, dishId) {
         if (comments == null) {
             return (<div></div>);
         }
@@ -216,7 +215,7 @@ class DishDetail extends Component {
                 <ul className='list-unstyled'>
                     {cmnts}
                 </ul>
-                <CommentForm comments={comments} dishId={dishId} addComment={addComment} />
+                <CommentForm comments={comments} dishId={dishId} postComment={postComment} />
             </div>
         );
     }
@@ -226,10 +225,10 @@ class DishDetail extends Component {
         console.log("DishDetail render is invoked");
         const dish = this.props.dish
         const comments = this.props.comments
-        const addComment = this.props.addComment
+        const postComment = this.props.postComment
         const dishID = this.props.dishId
         const dishItem = this.renderDish(dish);
-        const dishComment = this.renderComments(comments, addComment, dishID);
+        const dishComment = this.renderComments(comments, postComment, dishID);
 
         console.log(dish);
 
