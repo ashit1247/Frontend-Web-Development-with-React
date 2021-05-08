@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import {
-    Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron,
-    Button, Modal, ModalHeader, ModalBody, FormGroup, Label, Form, Input
-} from 'reactstrap';
+import { Navbar, NavbarBrand, Nav, NavbarToggler, NavItem, Collapse, Jumbotron, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
-class Header extends Component {
+export default class Header extends Component {
 
     constructor(props) {
-        super(props);
+        super(props)
+
         this.state = {
             isNavOpen: false,
             isModalOpen: false
@@ -20,58 +18,61 @@ class Header extends Component {
     }
 
     toggleNav() {
-        this.setState({
-            isNavOpen: !this.state.isNavOpen
-        });
+        this.setState({ isNavOpen: !this.state.isNavOpen });
     }
 
     toggleModal() {
-        this.setState({
-            isModalOpen: !this.state.isModalOpen
-        });
+        this.setState({ isModalOpen: !this.state.isModalOpen });
     }
 
-    handleLogin(event) {
+    handleLogin(evt) {
         this.toggleModal();
+
         alert("Username: " + this.username.value + " Password: " + this.password.value + " Remember: " + this.remember.checked);
-        event.PreventDefault();
+
+        evt.preventDefault();
     }
+
     render() {
         return (
             <React.Fragment>
                 <Navbar dark expand="md">
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav} />
-                        <NavbarBrand className="mr-auto" href="/home">
-                            <img src="assets/images/logo.png" width="30" height="41" alt="Ristorante Con Fusion"></img>
+                        <NavbarBrand className="mr-auto" href="/">
+                            <img src="assets/images/logo.png" height="30" widtg="41" alt="Ristorance Con Fusion" />
                         </NavbarBrand>
-                        <Collapse isOpen={this.state.isNavOpen} navbar>
-                            <Nav Navbar>
+                        <Collapse isOpen={this.state.isNavOpen} navbar >
+
+                            <Nav navbar>
                                 <NavItem>
                                     <NavLink className="nav-link" to="/home">
-                                        <span className="fa fa-home fa-lg"></span>Home
-                                    </NavLink>
+                                        <span className="fa fa-home fa-lg"></span> Home
+                                </NavLink>
                                 </NavItem>
+
                                 <NavItem>
                                     <NavLink className="nav-link" to="/aboutus">
-                                        <span className="fa fa-info fa-lg"></span>About Us
-                                    </NavLink>
+                                        <span className="fa fa-info fa-lg"></span> About us
+                                </NavLink>
                                 </NavItem>
+
                                 <NavItem>
                                     <NavLink className="nav-link" to="/menu">
-                                        <span className="fa fa-list fa-lg"></span>Menu
-                                    </NavLink>
+                                        <span className="fa fa-list fa-lg"></span> Menu
+                                </NavLink>
                                 </NavItem>
+
                                 <NavItem>
                                     <NavLink className="nav-link" to="/contactus">
-                                        <span className="fa fa-address-card fa-lg"></span>Contact Us
-                                    </NavLink>
+                                        <span className="fa fa-address-card fa-lg"></span> Contact us
+                                </NavLink>
                                 </NavItem>
                             </Nav>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
                                     <Button outline onClick={this.toggleModal}>
-                                        <span className="fa fa-sign-in fa-lg"></span>Login
+                                        <span className="fa fa-sign-in fa-lg">Login</span>
                                     </Button>
                                 </NavItem>
                             </Nav>
@@ -83,32 +84,35 @@ class Header extends Component {
                         <div className="row row-header">
                             <div className="col-12 col-sm-6">
                                 <h1>Ristorante Con Fusion</h1>
-                                <p>We take inspiration from the World's best cuisines, and create a unique fusion experiece. Our lipsmacking creations will tickle your culinary senses!</p>
+                                <p>We take inspiration from te World's best cuisines, and create a unique
+                                fusion experience. Our lipsmacking creations
+                                will ti ckle your culinary senses!
+                                </p>
                             </div>
                         </div>
                     </div>
                 </Jumbotron>
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-                    <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
+                    <ModalHeader toggle={this.toggleModal}> Login</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.handleLogin}>
                             <FormGroup>
                                 <Label htmlFor="username">Username</Label>
-                                <Input type="text" id="username" name="username"
-                                    innerRef={(input) => this.username = input} />
+                                <Input type="text" id="username" name="username" innerRef={(input) => this.username = input} />
                             </FormGroup>
+
                             <FormGroup>
                                 <Label htmlFor="password">Password</Label>
-                                <Input type="password" id="password" name="password"
-                                    innerRef={(input) => this.password = input} />
+                                <Input type="password" id="password" name="password" innerRef={(input) => this.password = input} />
                             </FormGroup>
+
                             <FormGroup check>
                                 <Label check>
-                                    <Input type="checkbox" name="remember"
-                                        innerRef={(input) => this.remember = input} />Remember me
+                                    <Input type="checkbox" name="remember" innerRef={(input) => this.remember = input} />
+                                    Remember me
                                 </Label>
                             </FormGroup>
-                            <Button type="submit" value="submit" className="bg-primary">Login</Button>
+                            <Button type="submit" value="submit" color="primary">Login</Button>
                         </Form>
                     </ModalBody>
                 </Modal>
@@ -116,5 +120,3 @@ class Header extends Component {
         );
     }
 }
-
-export default Header;
